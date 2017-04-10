@@ -16,25 +16,3 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
 }
 
 require_once('views/layout.php');
-
-/*
-// todo: create a controller for those
-if ($action) {
-    switch ($action) {
-        case 'add' :
-            if ($userLabel <= $tables[$table])
-                include("ajax/add.php");
-            break;
-        case 'edit' :
-            if ($userLabel == $tables[$table])
-                include("ajax/edit.php");
-            break;
-        case 'delete' :
-            if ($userLabel == $tables[$table])
-                include("ajax/delete.php");
-            break;
-    }
-} else {
-    include("views/home.php");
-}
-*/

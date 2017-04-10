@@ -1,4 +1,5 @@
 <?php
+// todo: remove all error_reporting invocations
 error_reporting(E_ALL);
 $clearanceLevel = $userLabel - $tables[$tableName];
 ?>
