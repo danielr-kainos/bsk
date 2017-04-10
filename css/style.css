@@ -1,0 +1,17 @@
+body {
+    background: #eee;
+}
+
+.add-new {
+    margin-top: 2.7em;
+    margin-left: 0.5em;
+}
+
+.where-form {
+    margin-top: -1.33333em;
+}
+
+.where-form button {
+    margin-top: 1.7em;
+    margin-left: 0;
+}
