@@ -3,7 +3,7 @@ Suspects, AddressNotes, Addresses, Locations, Tables CASCADE;
 
 CREATE TABLE IF NOT EXISTS Tables (
   id    SERIAL PRIMARY KEY,
-  name  TEXT PRIMARY KEY,
+  name  TEXT,
   label INT
 );
 

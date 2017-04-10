@@ -1,5 +1,5 @@
 TRUNCATE TABLE Users, Offences, Participations, SuspectNotes,
-Suspects, AddressNotes, Addresses, Locations, Tables, Labels;
+Suspects, AddressNotes, Addresses, Locations, Tables;
 
 /*
 todo: fill seed
@@ -9,7 +9,6 @@ todo: setup bcrypt for hashing: http://stackoverflow.com/questions/2647158/how-c
 INSERT INTO Tables (name, label) VALUES
   ('Addresses', 2),
   ('AddressNotes', 3),
-  ('Labels', 0),
   ('Locations', 1),
   ('Offences', 3),
   ('Participations', 4),
