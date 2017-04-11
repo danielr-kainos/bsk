@@ -1,11 +1,49 @@
-var table = document.getElementById("tableName") ? document.getElementById("tableName").value : null;
-var userLabel = document.getElementById("userLabel") ? document.getElementById("userLabel").value : null;
-var tableLabel = document.getElementById("tableLabel") ? document.getElementById("tableLabel").value : null;
+var table, userLabel, tableLabel;
 
-$(".button-collapse").sideNav();
-
-// todo: only open update and delete modals if record was chosen
-// todo: prepopulate forms with data
-$(document).ready(function(){
+$(document).ready(function () {
+    $(".button-collapse").sideNav();
     $('.modal').modal();
+
+    table = document.getElementById("tableName") ? document.getElementById("tableName").textContent : null;
+    userLabel = document.getElementById("userLabel") ? Number(document.getElementById("userLabel").textContent) : null;
+    tableLabel = document.getElementById("tableLabel") ? Number(document.getElementById("tableLabel").textContent) : null;
 });
+
+function openInsertModal() {
+    if (userLabel <= tableLabel) {
+        $('#insertModal').modal('open');
+    }
+}
+
+function openUpdateModal() {
+    var checked = $("input[type='radio']:checked");
+
+    if (checked.length) {
+        if (userLabel === tableLabel) {
+            $("#updateId").val(checked.val());
+            var databaseItem = checked.data('object');
+            for (var propertyName in databaseItem) {
+                if (databaseItem.hasOwnProperty(propertyName)) {
+                    $('[name="' + propertyName + '"]', '#updateForm').val(databaseItem[propertyName]);
+                }
+            }
+            $('#updateModal').modal('open');
+        }
+    }
+    else {
+        // todo: show dialog saying 'you need to select value first'
+    }
+}
+
+function openDeleteModal() {
+    var checked = $("input[type='radio']:checked");
+
+    if (checked.length) {
+        if (userLabel === tableLabel) {
+            $("#deleteId").val(checked.val());
+            $('#deleteModal').modal('open');
+        }
+    } else {
+        // todo: show dialog saying 'you need to select value first'
+    }
+}

@@ -12,9 +12,9 @@ $clearanceLevel = $userLabel - $tables[$tableName];
         <p id="tableLabel" style="display:none"><?= $tables[$tableName] ?></p>
     </div>
     <div class="col">
-        <a id="insertBtn" href="#insertModal" class="modal-trigger btn add-new <?= ($clearanceLevel > 0 ? 'disabled' : '') ?>">INSERT</a>
-        <a id="updateBtn" href="#updateModal" class="modal-trigger btn add-new <?= ($clearanceLevel != 0 ? 'disabled' : '') ?>">UPDATE</a>
-        <a id="deleteBtn" href="#deleteModal" class="modal-trigger btn red add-new <?= ($clearanceLevel != 0 ? 'disabled' : '') ?>">DELETE</a>
+        <a href="#" onclick="openInsertModal()" class="btn add-new <?= ($clearanceLevel > 0 ? 'disabled' : '') ?>">INSERT</a>
+        <a href="#" onclick="openUpdateModal()" class="btn add-new <?= ($clearanceLevel != 0 ? 'disabled' : '') ?>">UPDATE</a>
+        <a href="#" onclick="openDeleteModal()" class="btn red add-new <?= ($clearanceLevel != 0 ? 'disabled' : '') ?>">DELETE</a>
     </div>
 </div>
 
@@ -35,7 +35,7 @@ $clearanceLevel = $userLabel - $tables[$tableName];
     if ($clearanceLevel >= 0) {
         require_once("views/tables/partials/table_body.php");
     } else {
-        echo '<h5>You don\'t have permissions necessary to view those records</h5>';
+        echo "<h5>You don't have permissions necessary to view those records</h5>";
     }?>
 </div>
 

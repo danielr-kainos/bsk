@@ -22,8 +22,8 @@
             }
 
             if ($clearanceLevel == 0) {
-                echo '<td><input data-object="' . json_encode($tr) . '" type="radio" name="rows" id = "' . $tr['id'] . '" value="' . $tr['id'] . '"/>'
-                    . '<label for="' . $tr['id'] . '"></label></td>';
+                echo "<td><input data-object='" . json_encode($tr) . "' type='radio' name='rows' id = '" . $tr['id'] . "' value='" . $tr['id'] . "'/>"
+                    . "<label for='" . $tr['id'] . "'></label></td>";
             }
 
             echo '</tr>';
