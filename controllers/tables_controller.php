@@ -122,12 +122,15 @@ class TablesController
 
     private function getTableRows($tableName)
     {
-        // todo: handle PDOException when user inputs sth stupid
-        $where = empty($_POST['where']) ? '' : $_POST['where'];
-        $query = Db::getInstance()->prepare("SELECT * FROM $tableName " . ($where ? ' WHERE ' . $where : '') . " ORDER BY id");
-        $query->execute();
-        $tableRows = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $tableRows;
+        try {
+            $where = empty($_POST['where']) ? '' : $_POST['where'];
+            $query = Db::getInstance()->prepare("SELECT * FROM $tableName " . ($where ? ' WHERE ' . $where : '') . " ORDER BY id");
+            $query->execute();
+            $tableRows = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $tableRows;
+        } catch (Exception $e) {
+            call('error', 'error');
+        }
     }
 
     private function getColumnTypes($formData, $tableName)
