@@ -11,9 +11,13 @@ class AuthController
             $q->bindParam(":password", $_POST['password'], PDO::PARAM_STR, 128);
             $q->execute();
 
-            header("Location: /pg-bsk/index.php");
-            die();
+            if ($q->rowCount()) {
+                header("Location: /pg-bsk/index.php");
+                die();
+            }
         }
+
+        return call('error', 'login_error');
     }
 
     public function logout()

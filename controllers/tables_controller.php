@@ -37,10 +37,8 @@ class TablesController
 
     public function insert()
     {
-        if (User::getCurrentUser() == null)
-            return call('error', 'unauthorized');
+        $this->checkUserAccess('less_or_equal');
 
-        // todo: check access before executing anything
         $formData = $_POST['data'];
         $tableName = $_POST['tableName'];
         $columnTypes = $this->getColumnTypes($formData, $tableName);
@@ -54,10 +52,8 @@ class TablesController
 
     public function update()
     {
-        if (User::getCurrentUser() == null)
-            return call('error', 'unauthorized');
+        $this->checkUserAccess('equal');
 
-        // todo: check access before executing anything
         $formData = $_POST['data'];
         $tableName = $_POST['tableName'];
         $columnTypes = $this->getColumnTypes($formData, $tableName);
@@ -71,10 +67,8 @@ class TablesController
 
     public function delete()
     {
-        if (User::getCurrentUser() == null)
-            return call('error', 'unauthorized');
+        $this->checkUserAccess('equal');
 
-        // todo: check access before executing anything
         $recordId = $_POST['recordId'];
         $tableName = $_POST['tableName'];
 
@@ -208,5 +202,28 @@ class TablesController
             } else $id = intval($v['value']);
         }
         return "UPDATE $tableName SET {$values} WHERE id = $id";
+    }
+
+    private function checkUserAccess($param)
+    {
+        if (User::getCurrentUser() == null) {
+            call('error', 'unauthorized');
+            die();
+        }
+
+        $userLabel = User::getCurrentUser()->label;
+        $tableName = $_POST['tableName'];
+        $tableLabel = $this->getTables()[$tableName];
+
+        if ($param == 'equal') {
+            if ($userLabel !== $tableLabel) {
+                call('error', 'unauthorized');
+                die();
+            }
+        }
+        else if ($userLabel < $tableLabel) {
+            call('error', 'unauthorized');
+            die();
+        }
     }
 }

@@ -21,6 +21,7 @@ function call($controller, $action)
 
 $controllers = array(
         'auth' => ['login', 'logout'],
+        'error' => ['error', 'login_error', 'unauthorized'],
         'tables' => ['index', 'details', 'insert', 'update', 'delete']
     );
 

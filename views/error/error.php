@@ -1,6 +1,3 @@
-<p>Oops, this is the error page.</p>
-
-<p>Looks like something went wrong.</p>
 <div class="row">
     <div class="col s12">
         <div class="card-panel red darken-4">
