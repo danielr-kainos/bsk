@@ -12,13 +12,15 @@
     <?php
     if ($userLabel >= $tables[$tableName]) { ?>
         <?php foreach ($tableRows as $tr) {
+            unset($tr['password']);
+            unset($tr['session']);
+
             echo '<tr data-key="' . $tr['id'] . '">';
 
             foreach ($tr as $column => $td) {
-                if ($column != 'password' && $column != 'session')
-                    echo '<td>' . $td
-                        . ($tableHeadersJoin[$column] ? ' (' . $tableHeadersJoin[$column][$td] . ') ' : '')
-                        . '</td>';
+                echo '<td>' . $td
+                    . ($tableHeadersJoin[$column] ? ' (' . $tableHeadersJoin[$column][$td] . ') ' : '')
+                    . '</td>';
             }
 
             if ($clearanceLevel == 0) {

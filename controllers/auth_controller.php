@@ -11,7 +11,8 @@ class AuthController
             $q->bindParam(":password", $_POST['password'], PDO::PARAM_STR, 128);
             $q->execute();
 
-            $this->forceRedirectTo("/pg-bsk/index.php");
+            header("Location: /pg-bsk/index.php");
+            die();
         }
     }
 
@@ -21,13 +22,7 @@ class AuthController
         $q->bindParam(":session", session_id(), PDO::PARAM_STR, 64);
         $q->execute();
 
-        $this->forceRedirectTo("/pg-bsk/index.php");
-    }
-
-    // todo: replace this hack with a proper solution
-    private function forceRedirectTo($url)
-    {
-        echo '<script type="text/javascript">
-           window.location = "' . $url . '"</script>';
+        header("Location: /pg-bsk/index.php");
+        die();
     }
 }

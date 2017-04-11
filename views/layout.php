@@ -26,7 +26,7 @@
 
 <main>
     <div class="container">
-        <?php require_once('routes.php'); ?>
+        <?php require_once($viewPath); ?>
     </div>
 </main>
 

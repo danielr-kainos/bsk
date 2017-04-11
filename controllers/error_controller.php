@@ -4,11 +4,13 @@ class ErrorController
 {
     public function error()
     {
-        require_once('views/error/error.php');
+        $viewPath = 'views/error/error.php';
+        require_once('views/layout.php');
     }
 
     public function unauthorized()
     {
-        require_once('views/error/unauthorized.php');
+        $viewPath = 'views/error/unauthorized.php';
+        require_once('views/layout.php');
     }
 }

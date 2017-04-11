@@ -1,6 +1,7 @@
 <?php
 require_once('connection.php');
 require_once('models/user.php');
+require_once('utils/view_generator.php');
 
 // todo: setup SSL
 // todo: serve only index.php, css/ and scripts/
@@ -15,4 +16,4 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
     $action = 'index';
 }
 
-require_once('views/layout.php');
+require_once('routes.php');
