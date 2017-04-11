@@ -1,7 +1,7 @@
 <?php if (User::getCurrentUser() == null) { ?>
     <?php $uniqid = uniqid(); ?>
     <form id="<?= $uniqid ?>" class="navbar-form navbar-right"
-          action="index.php?controller=auth&action=login" method="post">
+          action="?controller=auth&action=login" method="post">
         <li>
             <div class="input-field">
                 <i class="material-icons prefix">account_circle</i>

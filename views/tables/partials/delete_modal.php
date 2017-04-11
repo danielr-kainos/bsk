@@ -4,7 +4,7 @@
         <p>This will permanently remove record from database.</p>
     </div>
     <div class="modal-footer">
-        <form id="deleteForm" action="index.php?controller=tables&action=delete" method="post">
+        <form id="deleteForm" action="?controller=tables&action=delete" method="post">
             <input type="hidden" id="deleteId" name="id" value=""/>
             <a href="#" onclick="sendDeleteForm()" class="modal-action modal-close red waves-effect waves-red btn">Delete</a>
             <a href="#!" class="modal-close btn-flat ">Cancel</a>

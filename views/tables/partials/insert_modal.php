@@ -1,7 +1,7 @@
 <div id="insertModal" class="modal">
     <div class="modal-content">
         <h4>Insert</h4>
-        <form id="insertForm" action="index.php?controller=tables&action=insert" method="post">
+        <form id="insertForm" action="?controller=tables&action=insert" method="post">
             <?php
             foreach ($tableHeaders as $header) {
                 $column = $header['column_name'];

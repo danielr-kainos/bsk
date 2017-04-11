@@ -1,6 +1,4 @@
 <?php
-// todo: remove all error_reporting invocations
-error_reporting(E_ALL);
 $clearanceLevel = $userLabel - $tables[$tableName];
 ?>
 
@@ -19,7 +17,7 @@ $clearanceLevel = $userLabel - $tables[$tableName];
 </div>
 
 <div class="row where-form">
-    <form method="POST" action="/pg-bsk/?controller=tables&action=details&table=<?= $tableName ?>">
+    <form method="POST" action="?controller=tables&action=details&table=<?= $tableName ?>">
         <div class="input-field col s9 m6 l4">
             <input id="where" name="where" type="text">
             <label for="where">Where...</label>

@@ -12,7 +12,7 @@ class AuthController
             $q->execute();
 
             if ($q->rowCount()) {
-                header("Location: /pg-bsk/index.php");
+                header("Location: index.php");
                 die();
             }
         }
@@ -26,7 +26,7 @@ class AuthController
         $q->bindParam(":session", session_id(), PDO::PARAM_STR, 64);
         $q->execute();
 
-        header("Location: /pg-bsk/index.php");
+        header("Location: index.php");
         die();
     }
 }

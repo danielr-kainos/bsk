@@ -1,6 +1,7 @@
 <?php
 require_once('connection.php');
 
+// todo: this is not a model, convert this to service or sth
 class User
 {
     public $login;

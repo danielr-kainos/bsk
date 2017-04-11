@@ -1,12 +1,6 @@
 TRUNCATE TABLE Users, Offences, Participations, SuspectNotes,
 Suspects, AddressNotes, Addresses, Locations, Tables;
 
-/*
-todo: fill seed
-todo: setup bcrypt for hashing: http://stackoverflow.com/questions/2647158/how-can-i-hash-passwords-in-postgresql
-  remember to change insert method in tables_controller when doing that!!
- */
-
 INSERT INTO Tables (name, label) VALUES
   ('Addresses', 2),
   ('AddressNotes', 3),
