@@ -10,7 +10,9 @@ class TablesController
             return call('error', 'unauthorized');
 
         $tables = $this->getTables();
-        require_once('views/tables/index.php');
+
+        $viewPath = 'views/tables/index.php';
+        require_once('views/layout.php');
     }
 
     public function details()
@@ -29,28 +31,57 @@ class TablesController
         $tableRows = $this->getTableRows($tableName);
         $tableHeadersJoin = $this->getTableHeadersJoin($tableHeaders, $tables);
 
-        require_once('views/tables/details.php');
+        $viewPath = 'views/tables/details.php';
+        require_once('views/layout.php');
     }
 
-    // todo: implement 3 methods below
     public function insert()
     {
         if (User::getCurrentUser() == null)
             return call('error', 'unauthorized');
 
-        $this->forceRedirectTo("/pg-bsk/index.php");
+        // todo: check access before executing anything
+        $formData = $_POST['data'];
+        $tableName = $_POST['tableName'];
+        $columnTypes = $this->getColumnTypes($formData, $tableName);
+        $queryText = $this->buildInsertQuery($formData, $tableName, $columnTypes);
+
+        $query = Db::getInstance()->prepare($queryText);
+        $query->execute();
+
+        die();
     }
 
     public function update()
     {
         if (User::getCurrentUser() == null)
             return call('error', 'unauthorized');
+
+        // todo: check access before executing anything
+        $formData = $_POST['data'];
+        $tableName = $_POST['tableName'];
+        $columnTypes = $this->getColumnTypes($formData, $tableName);
+        $queryText = $this->buildUpdateQuery($formData, $tableName, $columnTypes);
+
+        $query = Db::getInstance()->prepare($queryText);
+        $query->execute();
+
+        die();
     }
 
     public function delete()
     {
         if (User::getCurrentUser() == null)
             return call('error', 'unauthorized');
+
+        // todo: check access before executing anything
+        $recordId = $_POST['recordId'];
+        $tableName = $_POST['tableName'];
+
+        $q = Db::getInstance()->prepare("DELETE FROM $tableName WHERE id = $recordId");
+        $q->execute();
+
+        die();
     }
 
     private function getTables()
@@ -105,10 +136,77 @@ class TablesController
         return $tableRows;
     }
 
-    // todo: replace this hack with a proper solution
-    private function forceRedirectTo($url)
+    private function getColumnTypes($formData, $tableName)
     {
-        echo '<script type="text/javascript">
-           window.location = "' . $url . '"</script>';
+        $typeOf = '';
+        $i = 0;
+        foreach ($formData as $k => $v) {
+            if ($i++) {
+                $typeOf .= ', ';
+            }
+            $column = $v['name'];
+            $typeOf .= "pg_typeof($column) as $column";
+        }
+
+        $q = Db::getInstance()->query("SELECT $typeOf FROM {$tableName}");
+        return $q->fetch(PDO::FETCH_ASSOC);
+    }
+
+    private function buildInsertQuery($formData, $tableName, $columnTypes)
+    {
+        $i = 0;
+        $values = '';
+        $cols = '';
+        foreach ($formData as $k => $v) {
+            $c = $v['name'];
+            if ($c !== 'id') {
+                if (++$i !== 1) {
+                    $values .= ', ';
+                    $cols .= ', ';
+                }
+                $cols .= $c;
+                if (
+                    $columnTypes[$c] == "character varying" ||
+                    $columnTypes[$c] == "date" ||
+                    $columnTypes[$c] == "text"
+                ) {
+                    if ($tableName == 'Users' && $c == 'password')
+                        $values .= "MD5('" . $v['value'] . "')";
+                    else
+                        $values .= "'" . $v['value'] . "'";
+                } else
+                    $values .= intval($v['value']);
+            }
+        }
+        return "INSERT INTO $tableName ({$cols}) VALUES ({$values})";
+    }
+
+    private function buildUpdateQuery($formData, $tableName, $columnTypes)
+    {
+        $i = 0;
+        $id = 0;
+        $values = '';
+        foreach ($formData as $k => $v) {
+            $c = $v['name'];
+            if ($c !== "id") {
+                $i++;
+                if ($i != 1) {
+                    $values .= ', ';
+                }
+                $values .= $c . '= ';
+                if (
+                    $columnTypes[$c] == "character varying" ||
+                    $columnTypes[$c] == "date" ||
+                    $columnTypes[$c] == "text"
+                ) {
+                    if ($tableName == 'Users' && $c == 'password')
+                        $values .= "MD5('" . $v['value'] . "')";
+                    else
+                        $values .= "'" . $v['value'] . "'";
+                } else
+                    $values .= intval($v['value']);
+            } else $id = intval($v['value']);
+        }
+        return "UPDATE $tableName SET {$values} WHERE id = $id";
     }
 }

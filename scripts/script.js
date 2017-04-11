@@ -4,7 +4,7 @@ $(document).ready(function () {
     $(".button-collapse").sideNav();
     $('.modal').modal();
 
-    table = document.getElementById("tableName") ? document.getElementById("tableName").textContent : null;
+    tableName = document.getElementById("tableName") ? document.getElementById("tableName").textContent : null;
     userLabel = document.getElementById("userLabel") ? Number(document.getElementById("userLabel").textContent) : null;
     tableLabel = document.getElementById("tableLabel") ? Number(document.getElementById("tableLabel").textContent) : null;
 });
@@ -46,4 +46,37 @@ function openDeleteModal() {
     } else {
         // todo: show dialog saying 'you need to select value first'
     }
+}
+
+function sendInsertForm() {
+    var post = {
+        tableName: tableName,
+        data: $('#insertForm').serializeArray()
+    };
+
+    $.post("?controller=tables&action=insert", post, function () {
+        location.reload();
+    });
+}
+
+function sendUpdateForm() {
+    var post = {
+        tableName: tableName,
+        data: $('#updateForm').serializeArray()
+    };
+
+    $.post("?controller=tables&action=update", post, function () {
+        location.reload();
+    });
+}
+
+function sendDeleteForm() {
+    var post = {
+        tableName: tableName,
+        recordId: $('#deleteId').val()
+    };
+
+    $.post("?controller=tables&action=delete", post, function () {
+        location.reload();
+    });
 }

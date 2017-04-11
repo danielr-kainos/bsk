@@ -25,7 +25,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <a href="javascript:document.getElementById('insertForm').submit();" class="modal-action modal-close waves-effect waves-green btn">Insert</a>
+        <a href="#" onclick="sendInsertForm()" class="modal-action modal-close waves-effect waves-green btn">Insert</a>
         <a href="#!" class="modal-close btn-flat ">Cancel</a>
     </div>
 </div>

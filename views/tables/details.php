@@ -7,7 +7,7 @@ $clearanceLevel = $userLabel - $tables[$tableName];
 
 <div class="row">
     <div class="col">
-        <h2 class="header"><?= $tableName ?></h2>
+        <h2 id="tableName" class="header"><?= $tableName ?></h2>
         <p id="userLabel" style="display:none"><?= $userLabel ?></p>
         <p id="tableLabel" style="display:none"><?= $tables[$tableName] ?></p>
     </div>
