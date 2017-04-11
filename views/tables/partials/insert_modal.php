@@ -10,14 +10,14 @@
                 else {
                     ?><label for="<?= $column ?>"><?= $column ?></label>
                     <?php if ($tableHeadersJoin[$column]) { ?>
-                        <select name="<?= $column ?>">
+                        <select class="browser-default" name="<?= $column ?>">
                             <?php
                             foreach ($tableHeadersJoin[$column] as $key => $value) { ?>
                                 <option value="<?= $key ?>"><?= $value ?></option>
                             <?php } ?>
-                        </select><br/>
+                        </select>
                     <?php } else { ?>
-                        <input type="text" name="<?= $column ?>"/><br/>
+                        <input type="text" name="<?= $column ?>"/>
                         <?php
                     }
                 }
