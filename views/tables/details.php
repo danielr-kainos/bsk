@@ -1,8 +1,3 @@
-<?php
-$clearanceLevel = $userLabel - $tables[$tableName];
-?>
-
-
 <div class="row">
     <div class="col">
         <h2 id="tableName" class="header"><?= $tableName ?></h2>

@@ -23,13 +23,16 @@ class TablesController
         if (empty($_GET['table']))
             return call('error', 'error');
 
-        // todo: skip some of these depending on labels
         $userLabel = User::getCurrentUser()->label;
         $tables = $this->getTables();
         $tableName = $_GET['table'];
-        $tableHeaders = $this->getTableHeaders($tableName);
-        $tableRows = $this->getTableRows($tableName);
-        $tableHeadersJoin = $this->getTableHeadersJoin($tableHeaders, $tables);
+
+        $clearanceLevel = $userLabel - $tables[$tableName];
+        if ($clearanceLevel >= 0) {
+            $tableHeaders = $this->getTableHeaders($tableName);
+            $tableRows = $this->getTableRows($tableName);
+            $tableHeadersJoin = $this->getTableHeadersJoin($tableHeaders, $tables);
+        }
 
         $viewPath = 'views/tables/details.php';
         require_once('views/layout.php');
