@@ -54,8 +54,13 @@ function sendInsertForm() {
         data: $('#insertForm').serializeArray()
     };
 
-    $.post("?controller=tables&action=insert", post, function () {
-        location.reload();
+    $.post("?controller=tables&action=insert", post, function (res) {
+        if (res.includes('Fatal error')) {
+            // todo: show popup with error message
+            console.log(res);
+        } else {
+            location.reload();
+        }
     });
 }
 
@@ -65,8 +70,13 @@ function sendUpdateForm() {
         data: $('#updateForm').serializeArray()
     };
 
-    $.post("?controller=tables&action=update", post, function () {
-        location.reload();
+    $.post("?controller=tables&action=update", post, function (res) {
+        if (res.includes('Fatal error')) {
+            // todo: show popup with error message
+            console.log(res);
+        } else {
+            location.reload();
+        }
     });
 }
 
@@ -76,7 +86,12 @@ function sendDeleteForm() {
         recordId: $('#deleteId').val()
     };
 
-    $.post("?controller=tables&action=delete", post, function () {
-        location.reload();
+    $.post("?controller=tables&action=delete", post, function (res) {
+        if (res.includes('Fatal error')) {
+            // todo: show popup with error message
+            console.log(res);
+        } else {
+            location.reload();
+        }
     });
 }

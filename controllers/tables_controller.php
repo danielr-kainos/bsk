@@ -26,10 +26,10 @@ class TablesController
         $userLabel = User::getCurrentUser()->label;
         $tables = $this->getTables();
         $tableName = $_GET['table'];
+        $tableHeaders = $this->getTableHeaders($tableName);
 
         $clearanceLevel = $userLabel - $tables[$tableName];
         if ($clearanceLevel >= 0) {
-            $tableHeaders = $this->getTableHeaders($tableName);
             $tableRows = $this->getTableRows($tableName);
             $tableHeadersJoin = $this->getTableHeadersJoin($tableHeaders, $tables);
         }
@@ -223,6 +223,12 @@ class TablesController
 
         if ($param == 'equal') {
             if ($userLabel !== $tableLabel) {
+                call('error', 'unauthorized');
+                die();
+            }
+        }
+        else if ($param == 'less_or_equal') {
+            if ($userLabel > $tableLabel) {
                 call('error', 'unauthorized');
                 die();
             }
