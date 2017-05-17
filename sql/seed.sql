@@ -13,12 +13,12 @@ INSERT INTO Tables (name, label) VALUES
   ('Users', 0);
 
 INSERT INTO Users (login, label, password, session) VALUES
-  ('admin', 0, MD5('Admin!'), NULL),
-  ('poziom1', 1, MD5('Poziom1!'), NULL),
-  ('poziom2', 2, MD5('Poziom2!'), NULL),
-  ('poziom3', 3, MD5('Poziom3!'), NULL),
-  ('poziom4', 4, MD5('Poziom4!'), NULL),
-  ('poziom5', 5, MD5('Poziom5!'), NULL);
+  ('admin', 0, crypt('Admin!', gen_salt('bf', 8)), NULL),
+  ('poziom1', 1, crypt('Poziom1!', gen_salt('bf', 8)), NULL),
+  ('poziom2', 2, crypt('Poziom2!', gen_salt('bf', 8)), NULL),
+  ('poziom3', 3, crypt('Poziom3!', gen_salt('bf', 8)), NULL),
+  ('poziom4', 4, crypt('Poziom4!', gen_salt('bf', 8)), NULL),
+  ('poziom5', 5, crypt('Poziom5!', gen_salt('bf', 8)), NULL);
 
 INSERT INTO Locations (id, longitude, latitude, description) VALUES
   (0, 52.8790, 18.7948, 'Baza ISIS w Ciechocinku'),
@@ -28,7 +28,6 @@ INSERT INTO Locations (id, longitude, latitude, description) VALUES
   (4, 38.9072, 77.0369, 'Bialy dom'),
   (5, 12.1696, 68.9900, 'Curacao');
 SELECT setval(pg_get_serial_sequence('Locations', 'id'), coalesce(max(id)+1,1), false) FROM Locations;
-
 
 INSERT INTO Addresses (id, location_id, street, house_number, plate_number, postal_code, town, country) VALUES
   (0, 0, 'Kolejowa', 11, 24, '87-720', 'Ciechocinek', 'Poland'),

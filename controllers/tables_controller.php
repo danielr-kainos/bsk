@@ -171,7 +171,7 @@ class TablesController
                     $columnTypes[$c] == "text"
                 ) {
                     if ($tableName == 'Users' && $c == 'password')
-                        $values .= "MD5('" . $v['value'] . "')";
+                        $values .= "crypt('" . $v['value'] . "', gen_salt('bf', 8))";
                     else
                         $values .= "'" . $v['value'] . "'";
                 } else
@@ -200,7 +200,7 @@ class TablesController
                     $columnTypes[$c] == "text"
                 ) {
                     if ($tableName == 'Users' && $c == 'password')
-                        $values .= "MD5('" . $v['value'] . "')";
+                        $values .= "crypt('" . $v['value'] . "', gen_salt('bf', 8))";
                     else
                         $values .= "'" . $v['value'] . "'";
                 } else

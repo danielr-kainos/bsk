@@ -54,7 +54,7 @@ function sendInsertForm() {
         data: $('#insertForm').serializeArray()
     };
 
-    $.post("?controller=tables&action=insert", post, handleResponse(res));
+    $.post("?controller=tables&action=insert", post, handleResponse);
 }
 
 function sendUpdateForm() {
@@ -63,7 +63,7 @@ function sendUpdateForm() {
         data: $('#updateForm').serializeArray()
     };
 
-    $.post("?controller=tables&action=update", post, handleResponse(res));
+    $.post("?controller=tables&action=update", post, handleResponse);
 }
 
 function sendDeleteForm() {
@@ -72,7 +72,7 @@ function sendDeleteForm() {
         recordId: $('#deleteId').val()
     };
 
-    $.post("?controller=tables&action=delete", post, handleResponse(res));
+    $.post("?controller=tables&action=delete", post, handleResponse);
 }
 
 function handleResponse(res) {

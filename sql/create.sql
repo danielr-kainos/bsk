@@ -1,6 +1,8 @@
 DROP TABLE Users, Offences, Participations, SuspectNotes,
 Suspects, AddressNotes, Addresses, Locations, Tables CASCADE;
 
+CREATE EXTENSION pgcrypto;
+
 CREATE TABLE IF NOT EXISTS Tables (
   id    SERIAL PRIMARY KEY,
   name  TEXT,
