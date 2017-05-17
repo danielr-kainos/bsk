@@ -31,7 +31,7 @@ function openUpdateModal() {
         }
     }
     else {
-        // todo: show dialog saying 'you need to select value first'
+        $('#selectItemModal').modal('open');
     }
 }
 
@@ -44,7 +44,7 @@ function openDeleteModal() {
             $('#deleteModal').modal('open');
         }
     } else {
-        // todo: show dialog saying 'you need to select value first'
+        $('#selectItemModal').modal('open');
     }
 }
 

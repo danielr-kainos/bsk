@@ -36,3 +36,4 @@
 <?php require_once("views/tables/partials/update_modal.php"); ?>
 <?php require_once("views/tables/partials/delete_modal.php"); ?>
 <?php require_once("views/tables/partials/bad_request_modal.php"); ?>
+<?php require_once("views/tables/partials/select_item_modal.php"); ?>
