@@ -49,7 +49,7 @@ CREATE VIEW Address_View AS
 
 CREATE TABLE IF NOT EXISTS AddressNotes (
   id         SERIAL PRIMARY KEY,
-  date       TIMESTAMP,
+  date       DATE,
   title      VARCHAR(50),
   note       TEXT,
   address_id INT
@@ -73,7 +73,7 @@ CREATE VIEW Suspect_View AS
 
 CREATE TABLE IF NOT EXISTS SuspectNotes (
   id         SERIAL PRIMARY KEY,
-  time       TIMESTAMP,
+  time       DATE,
   title      VARCHAR(50),
   note       TEXT,
   suspect_id INT
