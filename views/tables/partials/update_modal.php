@@ -26,6 +26,6 @@
     </div>
     <div class="modal-footer">
         <a href="#" onclick="sendUpdateForm()" class="modal-action modal-close waves-effect waves-green btn">Update</a>
-        <a href="#!" class="modal-close btn-flat ">Cancel</a>
+        <a href="#!" class="modal-close btn-flat">Cancel</a>
     </div>
 </div>

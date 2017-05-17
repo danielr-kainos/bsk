@@ -7,7 +7,7 @@
         <form id="deleteForm" action="?controller=tables&action=delete" method="post">
             <input type="hidden" id="deleteId" name="id" value=""/>
             <a href="#" onclick="sendDeleteForm()" class="modal-action modal-close red waves-effect waves-red btn">Delete</a>
-            <a href="#!" class="modal-close btn-flat ">Cancel</a>
+            <a href="#!" class="modal-close btn-flat">Cancel</a>
         </form>
     </div>
 </div>
