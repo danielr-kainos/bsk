@@ -1,24 +1,26 @@
 TRUNCATE TABLE Users, Offences, Participations, SuspectNotes,
 Suspects, AddressNotes, Addresses, Locations, Tables;
 
-INSERT INTO Tables (name, label) VALUES
-  ('Addresses', 2),
-  ('AddressNotes', 3),
-  ('Locations', 1),
-  ('Offences', 3),
-  ('Participations', 4),
-  ('SuspectNotes', 4),
-  ('Suspects', 3),
-  ('Tables', 0),
-  ('Users', 0);
+INSERT INTO Tables (id, name, label) VALUES
+  (0, 'Addresses', 2),
+  (1, 'AddressNotes', 3),
+  (2, 'Locations', 1),
+  (3, 'Offences', 3),
+  (4, 'Participations', 4),
+  (5, 'SuspectNotes', 4),
+  (6, 'Suspects', 3),
+  (7, 'Tables', 0),
+  (8, 'Users', 0);
+SELECT setval(pg_get_serial_sequence('Tables', 'id'), coalesce(max(id)+1,1), false) FROM Tables;
 
-INSERT INTO Users (login, label, password, session) VALUES
-  ('admin', 0, crypt('Admin!', gen_salt('bf', 8)), NULL),
-  ('poziom1', 1, crypt('Poziom1!', gen_salt('bf', 8)), NULL),
-  ('poziom2', 2, crypt('Poziom2!', gen_salt('bf', 8)), NULL),
-  ('poziom3', 3, crypt('Poziom3!', gen_salt('bf', 8)), NULL),
-  ('poziom4', 4, crypt('Poziom4!', gen_salt('bf', 8)), NULL),
-  ('poziom5', 5, crypt('Poziom5!', gen_salt('bf', 8)), NULL);
+INSERT INTO Users (id, login, label, password, session) VALUES
+  (0, 'admin', 0, crypt('Admin!', gen_salt('bf', 8)), NULL),
+  (1, 'poziom1', 1, crypt('Poziom1!', gen_salt('bf', 8)), NULL),
+  (2, 'poziom2', 2, crypt('Poziom2!', gen_salt('bf', 8)), NULL),
+  (3, 'poziom3', 3, crypt('Poziom3!', gen_salt('bf', 8)), NULL),
+  (4, 'poziom4', 4, crypt('Poziom4!', gen_salt('bf', 8)), NULL),
+  (5, 'poziom5', 5, crypt('Poziom5!', gen_salt('bf', 8)), NULL);
+SELECT setval(pg_get_serial_sequence('Users', 'id'), coalesce(max(id)+1,1), false) FROM Users;
 
 INSERT INTO Locations (id, longitude, latitude, description) VALUES
   (0, 52.8790, 18.7948, 'Baza ISIS w Ciechocinku'),
