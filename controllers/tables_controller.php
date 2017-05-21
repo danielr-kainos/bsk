@@ -109,9 +109,10 @@ class TablesController
         foreach ($tableHeaders as $header) {
             $columnName = $header['column_name'];
             $joinedTableHeader = false;
-            $t = str_replace('_id', '', $columnName) . '_view';
-            if (strpos($columnName, '_id') && $userLabel >= $tables[$t]) {
-                $q = Db::getInstance()->query("SELECT id, name as name FROM $t ORDER BY id");
+            $table = str_replace('_id', '', $columnName);
+            $tableView = $table . '_view';
+            if (strpos($columnName, '_id') && $userLabel >= $tables[$table]) {
+                $q = Db::getInstance()->query("SELECT id, name as name FROM $tableView ORDER BY id");
                 foreach ($q->fetchAll(PDO::FETCH_ASSOC) as $r) {
                     $joinedTableHeader[$r['id']] = $r['name'];
                 }

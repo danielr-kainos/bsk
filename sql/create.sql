@@ -1,15 +1,15 @@
-DROP TABLE Users, Offences, Participations, SuspectNotes,
-Suspects, AddressNotes, Addresses, Locations, Tables CASCADE;
+DROP TABLE users, offence, participation, suspect_note,
+suspect, address_note, address, location, tables CASCADE;
 
 CREATE EXTENSION pgcrypto;
 
-CREATE TABLE IF NOT EXISTS Tables (
+CREATE TABLE IF NOT EXISTS tables (
   id    SERIAL PRIMARY KEY,
   name  TEXT,
   label INT
 );
 
-CREATE TABLE IF NOT EXISTS Users (
+CREATE TABLE IF NOT EXISTS users (
   id       SERIAL PRIMARY KEY,
   login    VARCHAR(50),
   password VARCHAR(128),
@@ -17,21 +17,21 @@ CREATE TABLE IF NOT EXISTS Users (
   label    INT
 );
 
-CREATE TABLE IF NOT EXISTS Locations (
+CREATE TABLE IF NOT EXISTS location (
   id          SERIAL PRIMARY KEY,
   longitude   DOUBLE PRECISION,
   latitude    DOUBLE PRECISION,
   description TEXT NULL
 );
 
-CREATE VIEW Location_View AS
+CREATE VIEW location_view AS
   SELECT
     *,
     'lat: ' || latitude :: TEXT || ', lon: ' || longitude :: TEXT
       AS name
-  FROM Locations;
+  FROM location;
 
-CREATE TABLE IF NOT EXISTS Addresses (
+CREATE TABLE IF NOT EXISTS address (
   id           SERIAL PRIMARY KEY,
   street       VARCHAR(45),
   plate_number INT NULL,
@@ -42,14 +42,14 @@ CREATE TABLE IF NOT EXISTS Addresses (
   location_id  INT
 );
 
-CREATE VIEW Address_View AS
+CREATE VIEW address_view AS
   SELECT
     *,
     country :: TEXT || ', ' || town :: TEXT || ', ' || street :: TEXT
       AS name
-  FROM Addresses;
+  FROM address;
 
-CREATE TABLE IF NOT EXISTS AddressNotes (
+CREATE TABLE IF NOT EXISTS address_note (
   id         SERIAL PRIMARY KEY,
   date       DATE,
   title      VARCHAR(50),
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS AddressNotes (
   address_id INT
 );
 
-CREATE TABLE IF NOT EXISTS Suspects (
+CREATE TABLE IF NOT EXISTS suspect (
   id            SERIAL PRIMARY KEY,
   first_name    VARCHAR(45),
   last_name     VARCHAR(45),
@@ -66,14 +66,14 @@ CREATE TABLE IF NOT EXISTS Suspects (
   address_id    INT
 );
 
-CREATE VIEW Suspect_View AS
+CREATE VIEW suspect_view AS
   SELECT
     *,
     first_name :: TEXT || ' ' || last_name :: TEXT
       AS name
-  FROM Suspects;
+  FROM suspect;
 
-CREATE TABLE IF NOT EXISTS SuspectNotes (
+CREATE TABLE IF NOT EXISTS suspect_note (
   id         SERIAL PRIMARY KEY,
   time       DATE,
   title      VARCHAR(50),
@@ -81,21 +81,21 @@ CREATE TABLE IF NOT EXISTS SuspectNotes (
   suspect_id INT
 );
 
-CREATE TABLE IF NOT EXISTS Offences (
+CREATE TABLE IF NOT EXISTS offence (
   id          SERIAL PRIMARY KEY,
   date        DATE,
   description TEXT NULL,
   location_id INT
 );
 
-CREATE VIEW Offence_View AS
+CREATE VIEW offence_view AS
   SELECT
     *,
     'commited on: ' || date :: TEXT
       AS name
-  FROM Offences;
+  FROM offence;
 
-CREATE TABLE IF NOT EXISTS Participations (
+CREATE TABLE IF NOT EXISTS participation (
   id          SERIAL PRIMARY KEY,
   description TEXT NULL,
   suspect_id  INT,
