@@ -27,10 +27,9 @@ sed -i "s/DirectoryIndex /DirectoryIndex index.php/g" /etc/apache2/mods-enabled/
 
 # SSL
 a2enmod ssl
-cp /tmp/ssl/certs/server.crt /etc/ssl/certs/server.crt
-cp /tmp/ssl/private/server.key /etc/ssl/private/server.key
-# cp /tmp/ssl/certs/dhparam.pem /etc/ssl/certs/dhparam.pem
-# TODO: Other files needed by ssl
+cp /tmp/ssl/certs/www.example.com.cert.pem /etc/ssl/certs/www.example.com.cert.pem
+cp /tmp/ssl/private/www.example.com.key.pem /etc/ssl/private/www.example.com.key.pem
+cp /tmp/ssl/certs/ca-chain.cert.pem /etc/ssl/certs/ca-chain.cert.pem
 
 # validate config =========================================================
 apache2ctl configtest
