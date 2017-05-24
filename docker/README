@@ -1,0 +1,15 @@
+To create image:
+	(TTY1) Run 0.... script 
+	(TTY2) Run 1.... script in another tty 
+	(TTY1) Run /tmp/_setup_docker.sh 
+	(TTY2) Run 3.... script
+TODO: It should be done with "docker build" command, but there were troubles. 
+
+To run server:
+Run 4.... script
+
+To clean up:
+Run 5.... script
+
+Notice that server should be listed in /etc/hosts 
+echo "127.0.1.1	www.example.com" > /etc/hosts
