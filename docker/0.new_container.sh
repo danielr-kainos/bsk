@@ -1,1 +1,1 @@
-docker run -it -p 8080:80 debian:8 bash
+docker run -it -p 80:80 -p 443:443 debian:8 bash
